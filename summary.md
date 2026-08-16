@@ -15,7 +15,7 @@ Append-only record of repository file/code processing sessions.
 ```text
 ## YYYY-MM-DD HH:MM — <One-line task title>
 - Task: What was requested.
-- Did: What was executed (files modified/created/deleted and important decisions).
+- Did: What was executed (files modified/created/deleted, decisions made, validation performed).
 - Result: done / partially done / blocked.
 - Open: Any unfinished items.
 ```
@@ -28,3 +28,8 @@ Append-only record of repository file/code processing sessions.
 - Result: Done for root governance files.
 - Open: The old `Learning/` copies still need removal only after all required root content is verified.
 
+## 2026-08-16 — Completed Learning-to-Root Migration
+- Task: Promote the Learning governance system and make post-processing updates mandatory.
+- Did: Merged the Learning agent protocol into root `agents.md`; strengthened root `instructions.md`; promoted `DECISIONS.md`, `EXECUTION_FLOW.md`, `learning.md`, and `summary.md`; removed the redundant files from `Learning/`.
+- Result: Done.
+- Open: None.
