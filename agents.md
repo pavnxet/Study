@@ -2,7 +2,7 @@
 
 ## Mission
 
-This repository is a structured academic archive and knowledge base. It stores and organizes university study material and competitive-exam preparation material for long-term discovery, preservation, provenance, and future machine-assisted analysis.
+This repository is a structured academic archive and knowledge base. It stores and organizes university study material and **Rajasthan competitive-exam preparation material** for long-term discovery, preservation, provenance, and future machine-assisted analysis.
 
 It is **not** a generic file dump, application, database, or AI system. Do not introduce unrelated infrastructure.
 
@@ -31,29 +31,30 @@ institutions/
 
 Use the actual academic system. Do not invent semesters for a year-based program.
 
-### Competitive/public examinations
+### Rajasthan competitive/public examinations
+
+Do **not** create an extra `rajasthan/` directory. Rajasthan is the repository's fixed exam scope, so the exam family goes directly under `exams/`:
 
 ```text
 exams/
-└── <region-or-state>/
-    └── <exam-family>/
-        └── <level-or-variant>/
-            └── <year>/
-                ├── README.md
-                ├── syllabus.md
-                ├── metadata.yaml
-                ├── previous-papers/
-                ├── notes/
-                ├── question-banks/
-                ├── solutions/
-                ├── mock-papers/
-                ├── current-affairs/
-                ├── ocr/
-                ├── resources/
-                └── links/
+└── <exam-family>/
+    └── <level-or-variant>/
+        └── <year>/
+            ├── README.md
+            ├── syllabus.md
+            ├── metadata.yaml
+            ├── previous-papers/
+            ├── notes/
+            ├── question-banks/
+            ├── solutions/
+            ├── mock-papers/
+            ├── current-affairs/
+            ├── ocr/
+            ├── resources/
+            └── links/
 ```
 
-Use `exams/` when the material is a standalone competitive/recruitment/entrance/eligibility examination rather than a university course.
+Example: `exams/cet/graduation-level/2024/`.
 
 ## Core rules
 
@@ -137,18 +138,17 @@ Do not create meaningless README files just to fill directories.
 8. Add provenance and metadata where appropriate.
 9. Update indexes as required.
 
-## Adding a new competitive exam archive
+## Adding a new Rajasthan exam archive
 
-1. Identify region/state or national scope.
-2. Identify the exam family/name.
-3. Identify the level/variant.
-4. Identify the examination year.
-5. Create the year archive under `exams/`.
-6. Add `README.md`, `syllabus.md`, and `metadata.yaml` when applicable.
-7. Add only the categories actually needed.
-8. Preserve source documents separately from transcriptions/OCR.
-9. Record provenance and source URL when available.
-10. Never represent user-supplied formatted text as an official original document.
+1. Identify the exam family/name.
+2. Identify the level/variant.
+3. Identify the examination year.
+4. Create the year archive directly under `exams/<exam-family>/` — **never** under `exams/rajasthan/`.
+5. Add `README.md`, `syllabus.md`, and `metadata.yaml` when applicable.
+6. Add only the categories actually needed.
+7. Preserve source documents separately from transcriptions/OCR.
+8. Record provenance and source URL when available.
+9. Never represent user-supplied formatted text as an official original document.
 
 ## Adding a previous-year paper
 
@@ -202,7 +202,7 @@ Never commit API keys, passwords, access tokens, authentication secrets, or priv
 
 Before finishing a change, verify:
 
-- correct institution/program **or** exam family/region/year;
+- correct institution/program or Rajasthan exam family/level/year;
 - correct academic/exam hierarchy;
 - correct subject identity when applicable;
 - correct material category;
@@ -214,7 +214,8 @@ Before finishing a change, verify:
 - copyright concerns considered;
 - indexes/links are not stale;
 - no secrets were added;
-- documentation still describes the actual tree.
+- documentation still describes the actual tree;
+- no redundant `exams/rajasthan/` directory has been introduced.
 
 ## Default behavior
 
