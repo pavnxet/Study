@@ -6,7 +6,41 @@ This repository is a structured academic archive and knowledge base for universi
 
 ## Mandatory first step
 
-Before modifying the repository, read `agents.md`, `instructions.md`, relevant READMEs, and inspect the existing tree.
+Before modifying the repository, read these files in full:
+
+1. `agents.md` — binding instructions.
+2. `instructions.md` — repository architecture and operating rules.
+3. `learning.md` — persistent reusable lessons, preferences, and fixed mistakes.
+4. `summary.md` — recent repository-processing history; skim the latest entries.
+5. `DECISIONS.md` — meaningful architecture decisions.
+6. `EXECUTION_FLOW.md` — current processing workflow.
+7. Relevant README files and existing tree paths for the material being changed.
+
+## Root governance and post-processing protocol — MANDATORY
+
+The repository root is the canonical location for the governance/memory files below. Do not create a second competing governance system under another directory unless explicitly requested.
+
+| File | Role | Maintenance rule |
+|---|---|---|
+| `agents.md` | Binding repository/AI-agent rules | Edit when a durable operating rule changes |
+| `instructions.md` | Detailed architecture and operating instructions | Keep synchronized with actual repository behavior |
+| `learning.md` | Persistent reusable knowledge, user preferences, corrections | Edit in place; consolidate conflicts |
+| `summary.md` | Session history for file/code/repository processing | **Append-only; never delete/overwrite past entries** |
+| `DECISIONS.md` | Architecture Decision Record | Log meaningful decisions in the same session |
+| `EXECUTION_FLOW.md` | Living processing/workflow map | Update when processing structure/workflow materially changes |
+
+### Strict post-processing rule
+
+After **every substantial post-processing operation** on academic/exam material, agents must complete the governance update pass before declaring the task complete:
+
+1. Update the processed material and its README/metadata as required.
+2. Update `DECISIONS.md` if a meaningful architecture, naming, metadata, provenance, or workflow decision was made.
+3. Update `learning.md` with any new reusable rule, user preference, correction, or mistake fix. Edit existing facts in place instead of creating duplicates/conflicts.
+4. Append a concise entry to `summary.md` for file/code/repository processing work. Never rewrite old entries.
+5. Update `EXECUTION_FLOW.md` if the processing workflow, archive path, or automation flow changed.
+6. Re-read the relevant root governance files and verify consistency before reporting completion.
+
+Do not declare a substantial repository-processing task complete while required governance updates are missing.
 
 ## Rajasthan exam archive rules — MANDATORY
 
@@ -89,6 +123,12 @@ Derived stages must remain separate from the original.
 5. Add only useful categories.
 6. Preserve provenance and source treatment.
 
+## AI change governance
+
+The repository previously used a five-file agent memory pattern. It is now integrated at the repository root. Agents must treat the root files as the canonical system and may not silently fork their rules into `Learning/` or another duplicate location.
+
+A major architecture change may require a user-facing explanation before acceptance. Minor formatting or single-file metadata fixes do not require an interactive quiz.
+
 ## Review checklist
 
 Before finishing, verify:
@@ -103,6 +143,10 @@ Before finishing, verify:
 - provenance accurate;
 - no duplicate or stale path;
 - documentation matches the actual tree;
+- `learning.md` updated when a reusable lesson/correction was created;
+- `DECISIONS.md` updated for meaningful architecture choices;
+- `summary.md` appended for file/code processing;
+- `EXECUTION_FLOW.md` updated when workflow changed;
 - no secrets added.
 
-**Default principle: Preserve → organize → label → link → verify.**
+**Default principle: Preserve → organize → label → link → verify → post-process governance.**
