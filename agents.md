@@ -2,7 +2,7 @@
 
 ## Mission
 
-This repository is a structured academic archive and knowledge base. It stores and organizes study material for long-term discovery, preservation, provenance, and future machine-assisted analysis.
+This repository is a structured academic archive and knowledge base. It stores and organizes university study material and competitive-exam preparation material for long-term discovery, preservation, provenance, and future machine-assisted analysis.
 
 It is **not** a generic file dump, application, database, or AI system. Do not introduce unrelated infrastructure.
 
@@ -12,13 +12,13 @@ Before modifying the repository, read:
 
 1. `agents.md`
 2. `instructions.md`
-3. the relevant README(s) for the institution/program/subject being changed
+3. the relevant README(s) for the institution/program/subject or exam archive being changed
 
 Then inspect the existing repository tree before deciding where a new file belongs.
 
 ## Canonical architecture
 
-The preferred hierarchy is:
+### University/program material
 
 ```text
 institutions/
@@ -29,25 +29,31 @@ institutions/
             └── years/<year>/subjects/<subject-code>-<subject-slug>/
 ```
 
-The program should use either `semesters/` or `years/` according to its real academic system. Do not invent a semester for a year-based program.
+Use the actual academic system. Do not invent semesters for a year-based program.
 
-Subject material belongs below the subject identity and is categorized as:
+### Competitive/public examinations
 
-- `syllabus/`
-- `previous-papers/`
-- `question-banks/`
-- `notes/`
-- `solutions/`
-- `assignments/`
-- `mock-papers/`
-- `books/`
-- `lecture-material/`
-- `extra-material/`
-- `ocr/`
-- `images/`
-- `links/`
+```text
+exams/
+└── <region-or-state>/
+    └── <exam-family>/
+        └── <level-or-variant>/
+            └── <year>/
+                ├── README.md
+                ├── syllabus.md
+                ├── metadata.yaml
+                ├── previous-papers/
+                ├── notes/
+                ├── question-banks/
+                ├── solutions/
+                ├── mock-papers/
+                ├── current-affairs/
+                ├── ocr/
+                ├── resources/
+                └── links/
+```
 
-Create only categories that are actually needed.
+Use `exams/` when the material is a standalone competitive/recruitment/entrance/eligibility examination rather than a university course.
 
 ## Core rules
 
@@ -57,32 +63,27 @@ Never replace an original document with OCR, cleanup, compression, or transcript
 
 ### 2. Never fabricate
 
-Do not invent:
-
-- academic documents;
-- question papers;
-- official status;
-- authors;
-- dates;
-- source URLs;
-- metadata values;
-- verification claims.
-
-Unknown information must remain unknown.
+Do not invent academic documents, question papers, official status, authors, dates, source URLs, metadata values, or verification claims. Unknown information must remain unknown.
 
 ### 3. Use deterministic names
 
-Use lowercase paths, stable subject codes, descriptive slugs, and ISO-like dates.
+Use lowercase paths, stable subject/exam codes, descriptive slugs, and ISO-like dates.
 
 Preferred paper filename:
 
 `YYYY-MM-<subject-code>-<subject-slug>.pdf`
 
+For exams without subject codes:
+
+`YYYY-<exam-slug>-<paper-name>.<ext>`
+
 Avoid `final`, `new`, `latest`, `copy`, `scan123`, or other ambiguous names.
 
 ### 4. Keep provenance
 
-For external material, preserve the source URL and institution/author information when known. Mark official vs unofficial status only when supported by evidence.
+For external material, preserve the source URL and institution/conducting-body/author information when known. Mark official vs unofficial status only when supported by evidence.
+
+If source text has been formatted, transcribed, OCR'd, or corrected, explicitly record that treatment.
 
 ### 5. Respect copyright
 
@@ -90,15 +91,27 @@ Do not assume online availability means redistribution is permitted. When redist
 
 ### 6. Avoid unnecessary duplication
 
-Do not copy the same paper into several folders just to make it appear in multiple indexes. Prefer links or a canonical source location.
+Do not copy the same paper into several folders merely to make it appear in multiple indexes. Prefer links or a canonical source location.
 
 ### 7. Metadata should earn its keep
 
 Use `metadata.yaml` when it materially improves provenance, automation, versioning, or searchability. Do not require metadata for every small note.
 
+For competitive exams, useful fields can include:
+
+```yaml
+exam_name:
+conducting_body:
+year:
+question_count:
+total_marks:
+duration:
+negative_marking:
+```
+
 ### 8. Keep indexes useful
 
-When adding or removing material, update the relevant index when it is part of the repository's established indexing scheme. Do not create redundant indexes.
+When adding or removing material, update the relevant index when it is part of the established indexing scheme. Do not create redundant indexes.
 
 ### 9. README hierarchy
 
@@ -107,7 +120,8 @@ Use READMEs where they provide real navigation or context:
 - root repository README;
 - institution/program overview when useful;
 - semester/year overview when useful;
-- subject README for substantial subjects.
+- subject README for substantial subjects;
+- exam-year README for competitive-exam archives.
 
 Do not create meaningless README files just to fill directories.
 
@@ -123,11 +137,24 @@ Do not create meaningless README files just to fill directories.
 8. Add provenance and metadata where appropriate.
 9. Update indexes as required.
 
+## Adding a new competitive exam archive
+
+1. Identify region/state or national scope.
+2. Identify the exam family/name.
+3. Identify the level/variant.
+4. Identify the examination year.
+5. Create the year archive under `exams/`.
+6. Add `README.md`, `syllabus.md`, and `metadata.yaml` when applicable.
+7. Add only the categories actually needed.
+8. Preserve source documents separately from transcriptions/OCR.
+9. Record provenance and source URL when available.
+10. Never represent user-supplied formatted text as an official original document.
+
 ## Adding a previous-year paper
 
-1. Place it under the correct subject.
-2. Use `previous-papers/<year>/<session>/`.
-3. Name it `YYYY-MM-<subject-code>-<subject-slug>[-<paper-id>].ext`.
+1. Place it under the correct subject or exam archive.
+2. Use `previous-papers/<year>/<session>/` where a session exists.
+3. Use a deterministic filename.
 4. Preserve the original format.
 5. Record provenance if externally sourced.
 6. Check whether the same content already exists by filename and, when practical, by hash.
@@ -136,7 +163,7 @@ Do not create meaningless README files just to fill directories.
 
 ## OCR rules
 
-Use the following conceptual lifecycle:
+Use the lifecycle:
 
 `original → OCR → corrected OCR → verified transcription`
 
@@ -175,13 +202,14 @@ Never commit API keys, passwords, access tokens, authentication secrets, or priv
 
 Before finishing a change, verify:
 
-- correct institution/program/academic level;
-- correct subject identity;
+- correct institution/program **or** exam family/region/year;
+- correct academic/exam hierarchy;
+- correct subject identity when applicable;
 - correct material category;
 - deterministic filename;
 - no unnecessary duplicate;
 - original preserved;
-- derived OCR clearly separated;
+- derived OCR/transcription clearly separated;
 - provenance accurate;
 - copyright concerns considered;
 - indexes/links are not stale;
