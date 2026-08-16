@@ -1,0 +1,20 @@
+exam_name: "पर्यवेक्षक (महिला) सीधी भर्ती"
+year: 2024
+recruitment_type: "Direct Recruitment / Open Market"
+level: "Graduation Standard"
+total_marks: 200
+duration: "3 hours"
+question_type: "Objective / Multiple Choice"
+negative_marking: false
+special_focus:
+  - पोषण
+  - स्वास्थ्य
+  - प्रारम्भिक बाल देखभाल
+  - शिक्षा
+sections:
+  first:
+    marks: 115
+  second:
+    marks: 85
+source: "User-supplied syllabus transcription"
+status: "structured-archive"
