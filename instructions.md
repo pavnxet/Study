@@ -21,29 +21,28 @@ institutions/
 
 A program uses either `semesters/` or `years/` as appropriate. If the source institution has another stable hierarchy, adapt it at the academic-level boundary instead of inventing duplicate copies.
 
-For competitive/public examinations that are not naturally represented as a university program, use the separate exam archive:
+For competitive/public examinations, this repository is specifically focused on **Rajasthan examinations**, so do not create a redundant `rajasthan/` directory. Use the exam family directly under `exams/`:
 
 ```text
 exams/
-└── <region-or-state>/
-    └── <exam-family>/
-        └── <level-or-variant>/
-            └── <year>/
-                ├── README.md
-                ├── syllabus.md
-                ├── metadata.yaml
-                ├── previous-papers/
-                ├── notes/
-                ├── question-banks/
-                ├── solutions/
-                ├── mock-papers/
-                ├── current-affairs/
-                ├── ocr/
-                ├── resources/
-                └── links/
+└── <exam-family>/
+    └── <level-or-variant>/
+        └── <year>/
+            ├── README.md
+            ├── syllabus.md
+            ├── metadata.yaml
+            ├── previous-papers/
+            ├── notes/
+            ├── question-banks/
+            ├── solutions/
+            ├── mock-papers/
+            ├── current-affairs/
+            ├── ocr/
+            ├── resources/
+            └── links/
 ```
 
-This allows CET, state recruitment, entrance, eligibility, and other examination archives to coexist without forcing them into a university-semester hierarchy.
+Examples: `exams/cet/graduation-level/2024/`, `exams/reet/level-2/2025/`.
 
 ## 2. Subject identity
 
@@ -207,7 +206,7 @@ Agents must not invent academic documents, source URLs, official status, authors
 
 ## 17. Adding a new item
 
-1. Identify the institution/program **or** exam family/region.
+1. Identify the institution/program **or** Rajasthan exam family/level/year.
 2. Determine whether it belongs in the university hierarchy or under `exams/`.
 3. Identify the subject/exam and stable code/name.
 4. Choose the correct material category.
