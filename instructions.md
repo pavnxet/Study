@@ -6,7 +6,7 @@
 
 ## 1. Canonical information architecture
 
-Use this hierarchy by default:
+Use this hierarchy by default for university/program material:
 
 ```text
 institutions/
@@ -14,36 +14,36 @@ institutions/
     └── programs/
         └── <program>/
             ├── semesters/
-            │   └── <semester>/
-            │       └── subjects/
-            │           └── <subject-code>-<subject-slug>/
+            │   └── <semester>/subjects/<subject-code>-<subject-slug>/
             └── years/
-                └── <year>/
-                    └── subjects/
-                        └── <subject-code>-<subject-slug>/
+                └── <year>/subjects/<subject-code>-<subject-slug>/
 ```
 
-A program uses either `semesters/` or `years/` as appropriate. If the source institution has another stable hierarchy, adapt the structure at the academic-level boundary instead of inventing duplicate copies of the same subject.
+A program uses either `semesters/` or `years/` as appropriate. If the source institution has another stable hierarchy, adapt it at the academic-level boundary instead of inventing duplicate copies.
 
-Inside every subject, use these categories when they are actually needed:
+For competitive/public examinations that are not naturally represented as a university program, use the separate exam archive:
 
 ```text
-syllabus/
-previous-papers/<year>/<session>/
-question-banks/
-notes/
-solutions/
-assignments/
-mock-papers/
-books/
-lecture-material/
-extra-material/
-ocr/
-images/
-links/
+exams/
+└── <region-or-state>/
+    └── <exam-family>/
+        └── <level-or-variant>/
+            └── <year>/
+                ├── README.md
+                ├── syllabus.md
+                ├── metadata.yaml
+                ├── previous-papers/
+                ├── notes/
+                ├── question-banks/
+                ├── solutions/
+                ├── mock-papers/
+                ├── current-affairs/
+                ├── ocr/
+                ├── resources/
+                └── links/
 ```
 
-Do not create empty category folders merely for visual completeness. Git does not track empty directories; use `.gitkeep` only for intentional template directories where seeing the future structure is useful.
+This allows CET, state recruitment, entrance, eligibility, and other examination archives to coexist without forcing them into a university-semester hierarchy.
 
 ## 2. Subject identity
 
@@ -53,11 +53,11 @@ A subject directory is the canonical storage identity. Use the official/stable s
 
 Example: `mat-02-real-analysis-topology`.
 
-Do not create another copy of a subject simply because it appears in another semester/year view. If the same material genuinely belongs to multiple contexts, prefer a clear reference/link rather than duplication.
+Do not create another copy of a subject simply because it appears in another semester/year view. Prefer references/links rather than duplication.
 
 ## 3. Previous-year papers
 
-Store papers under the subject that the paper belongs to, then by examination year and session:
+Store papers under the subject or exam they belong to, then by examination year and session:
 
 ```text
 previous-papers/2025/december/2025-12-mat-02-real-analysis-topology.pdf
@@ -69,7 +69,9 @@ Recommended filename pattern:
 
 `YYYY-MM-<subject-code>-<subject-slug>[-<paper-id>].<ext>`
 
-The filename must communicate enough information to identify the paper without opening it.
+For exams without a subject code, use a stable exam/paper slug instead:
+
+`YYYY-<exam-slug>-<paper-name>.<ext>`
 
 ## 4. Syllabus rules
 
@@ -83,36 +85,29 @@ syllabus/
 └── archived/
 ```
 
-Use metadata when version, effective academic year, issuer, or source matters. Never silently overwrite an older syllabus.
+For a standalone competitive-exam archive, `syllabus.md` may be the canonical formatted syllabus when no original PDF is stored. Metadata must record provenance and whether the text has been transcribed or cleaned.
+
+Never silently overwrite an older syllabus.
 
 ## 5. Notes and study material
 
-Use `notes/` for actual explanatory study material. Unit/topic organization is encouraged when it improves navigation:
+Use `notes/` for explanatory study material. Unit/topic organization is encouraged when it improves navigation. For competitive exams, topic-based folders are often more appropriate than units.
 
-```text
-notes/unit-01/
-notes/unit-02/
-```
-
-Clearly label materially different origins such as personal, class, teacher, AI-generated, textbook-derived, or revision notes. Do not imply that AI-generated or unofficial material is university-issued.
+Clearly label materially different origins such as personal, class, teacher, AI-generated, textbook-derived, or revision notes. Do not imply that unofficial material is institution-issued.
 
 ## 6. Question banks and solutions
 
 Use `question-banks/` for collections of questions and `solutions/` for worked answers or answer keys. Organize question banks by unit/topic/type when that improves retrieval.
 
-Solutions should use the same stable source identity as the questions. For a paper, a solution may be named:
-
-`2025-12-mat-02-real-analysis-topology-solution.md`
-
-Do not duplicate the source paper inside the solutions directory.
+Solutions should use the same stable source identity as the questions. Do not duplicate the source paper inside `solutions/`.
 
 ## 7. OCR and transcriptions
 
 Original scans are authoritative source files. OCR is derived data.
 
-Use `ocr/` for machine-readable output and clearly distinguish stages, for example:
+Use `ocr/` for machine-readable output and distinguish:
 
-- `original` — the source document in its original format
+- `original` — source document in its original format
 - `ocr` — raw machine OCR
 - `corrected-ocr` — manually corrected OCR
 - `verified-transcription` — human-checked transcription
@@ -146,40 +141,36 @@ verified:
 tags: []
 ```
 
-Do not fabricate unknown values. Omit a field or use an explicit unknown value rather than guessing.
+Exam-specific metadata may additionally include `exam_name`, `conducting_body`, `question_count`, `total_marks`, `duration`, and `negative_marking`.
+
+Do not fabricate unknown values.
 
 ## 9. Provenance
 
-For externally sourced material, preserve the original source where practical. Record institution, author, publication/effective year, source URL, and whether the item is official or unofficial when known.
+For externally sourced material, preserve the original source where practical. Record institution/conducting body, author, publication/effective year, source URL, and whether the item is official or unofficial when known.
 
-If a file has been modified, OCR'd, transcribed, or cleaned, say so. Provenance is part of the archive, not optional decoration.
+If a file has been modified, OCR'd, transcribed, or cleaned, say so. Provenance is part of the archive.
 
 ## 10. Copyright and distribution
 
-Do not assume that online availability grants redistribution rights. For copyrighted books or questionable third-party PDFs, prefer an index entry containing citation and source URL. Personal notes and openly licensed/public-domain material can be stored according to their applicable rights.
+Do not assume that online availability grants redistribution rights. For copyrighted books or questionable third-party PDFs, prefer citation, metadata, and source URL instead of copying the work.
 
 Do not remove copyright notices or alter attribution.
 
 ## 11. Naming conventions
 
-Repository paths:
-
-- lowercase
-- stable separators (`-` for slugs)
-- no meaningless words such as `final`, `new`, `latest`, or `copy`
-- stable subject codes where available
-- ISO-like dates for dates that need sorting
+Repository paths must use lowercase, stable separators (`-` for slugs), stable subject/exam codes where available, and ISO-like dates where sorting matters. Avoid meaningless words such as `final`, `new`, `latest`, or `copy`.
 
 Examples:
 
 - good: `2025-12-mat-02-real-analysis-topology.pdf`
 - bad: `December paper final.pdf`
 
-Keep extensions lowercase and preserve the original format unless conversion is needed for a derived artifact.
+Keep extensions lowercase and preserve original formats unless a derived artifact is needed.
 
 ## 12. Indexes
 
-`indexes/` is the human- and machine-friendly cross-repository navigation layer. Keep it concise and accurate. At minimum maintain:
+`indexes/` is the human- and machine-friendly cross-repository navigation layer. At minimum maintain:
 
 - `subjects.md`
 - `syllabus.md`
@@ -188,18 +179,11 @@ Keep extensions lowercase and preserve the original format unless conversion is 
 - `question-banks.md`
 - `resources.md`
 
-Do not maintain redundant databases when directory paths already provide the needed information. If indexes become burdensome, automate them rather than creating more manual metadata.
+Exam archives may receive dedicated indexes when the collection becomes large enough. Do not create redundant indexes prematurely.
 
 ## 13. Missing material
 
-Missing resources should be visible rather than silently invented. Subject READMEs may use a simple status table such as:
-
-| Resource | Status |
-| --- | --- |
-| Syllabus | available / missing |
-| Previous papers | available / partial / missing |
-| Notes | available / partial / missing |
-| Solutions | available / partial / missing |
+Missing resources should be visible rather than silently invented. Subject/exam READMEs may use a simple status table showing available, partial, or missing resources.
 
 Never create placeholder academic content that looks like a real document.
 
@@ -211,7 +195,7 @@ Avoid binary duplication. Do not add application frameworks, databases, or servi
 
 ## 15. Large files
 
-Use normal Git for ordinary PDFs, Markdown, text, and modest images. Consider Git LFS only when real repository size or file-size constraints justify it. Very large books, video, or datasets should generally remain external or in a dedicated archival system when GitHub is not an appropriate distribution layer.
+Use normal Git for ordinary PDFs, Markdown, text, and modest images. Consider Git LFS only when real repository size or file-size constraints justify it. Very large books, video, or datasets should generally remain external or in a dedicated archival system when GitHub is not appropriate.
 
 Do not introduce Git LFS preemptively.
 
@@ -223,38 +207,37 @@ Agents must not invent academic documents, source URLs, official status, authors
 
 ## 17. Adding a new item
 
-Use this order:
-
-1. Identify institution and program.
-2. Identify whether the program uses semester or year organization.
-3. Identify the subject and stable subject code.
+1. Identify the institution/program **or** exam family/region.
+2. Determine whether it belongs in the university hierarchy or under `exams/`.
+3. Identify the subject/exam and stable code/name.
 4. Choose the correct material category.
 5. Choose a deterministic filename.
-6. Preserve the original file format.
+6. Preserve the original format.
 7. Add provenance/metadata when useful.
-8. Add OCR as a separate derived artifact when appropriate.
+8. Add OCR separately when appropriate.
 9. Update the relevant index/README.
 10. Check for duplicates and accidental secrets.
 
 ## 18. Validation before commit
 
-For every meaningful archive change, verify:
+Verify that:
 
-- the path matches the academic hierarchy;
+- the path matches the academic or exam hierarchy;
 - the filename is deterministic;
-- the source is not duplicated unnecessarily;
+- the source is not unnecessarily duplicated;
 - original and derived files are distinguishable;
 - provenance is not fabricated;
 - Markdown links point to real paths;
-- no secrets or private credentials were added;
-- the relevant index/README is not stale.
+- no secrets were added;
+- relevant indexes/READMEs are not stale;
+- formatting/transcription notes are present when source text was cleaned.
 
 ## 19. Scope control
 
 Prefer the smallest structure that solves the problem. Do not add a database, web app, CI system, semantic-search layer, or complex metadata schema merely because it might be useful someday.
 
-The repository should remain a clean academic archive first and an automation-friendly data source second.
+The repository should remain a clean academic/exam archive first and an automation-friendly data source second.
 
 ## 20. Final audit
 
-Before declaring a structural change complete, compare the result against this file and `agents.md`. Specifically check discoverability, scalability, naming, provenance, copyright handling, OCR separation, duplicate avoidance, and AI-agent readability.
+Before declaring a structural change complete, compare the result against this file and `agents.md`. Check discoverability, scalability, naming, provenance, copyright handling, OCR separation, duplicate avoidance, and AI-agent readability.
