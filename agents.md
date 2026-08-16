@@ -39,13 +39,9 @@ exams/
 
 For the current exam, the canonical directory is:
 
-```text
-exams/पर्यवेक्षक (महिला) सीधी भर्ती/
-```
+`exams/पर्यवेक्षक (महिला) सीधी भर्ती/`
 
 The supplied year **2024** and recruitment mode **सीधी भर्ती / Open Market** are metadata, not mandatory path components.
-
-If different editions of the same post later need coexistence, first inspect the existing archive and choose the least-nested documented solution.
 
 ## University/program architecture
 
