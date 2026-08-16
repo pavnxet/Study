@@ -1,0 +1,23 @@
+exam_name: "समान पात्रता परीक्षा (सीनियर सैकण्डरी स्तर)-2024"
+exam_family: cet
+level: senior-secondary-level
+year: 2024
+conducting_body: "राजस्थान कर्मचारी चयन बोर्ड, जयपुर"
+question_count: 150
+total_marks: 300
+duration: "03:00 HR"
+negative_marking: false
+language: "Hindi/English"
+document_type: syllabus
+source: user-provided syllabus text
+source_url:
+official: false
+verified: false
+transcription_status: cleaned-user-supplied-text
+notes: "OCR/layout artifacts were removed and the supplied syllabus was reorganized into Markdown."
+tags:
+  - cet
+  - senior-secondary-level
+  - syllabus
+  - rajasthan-exam
+  - 2024
